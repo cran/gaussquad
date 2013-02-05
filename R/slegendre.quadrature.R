@@ -17,32 +17,31 @@ slegendre.quadrature <- function( functn, rule, lower=0, upper=1, weighted=TRUE,
 ###	weighted = a boolean value which if true includes the weight function in the integrand
 ###	...      = other arguments passed to the function functn.
 ###
-	require( orthopolynom )
-	if ( !is.function( functn ) )
-		stop( "functn argument is not an R function" )
-	if ( !is.data.frame( rule ) )
-		stop( "rule argument is not a data frame" )
-	if ( is.infinite( lower ) )
-		stop( "lower bound is infinite" )
-	if ( is.infinite( upper ) )
-		stop( "lower bound is infinite" )
-	if ( weighted ) {
-		ff <- 
-			if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
-				function( x ) functn( x, ... )
-			else
-				functn
-	}
-	else {
-		ff <- 
-			if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
-				function( x ) { functn( x, ... ) / slegendre.weight( x ) }
-			else
-				function( x ) { functn( x ) / slegendre.weight( x ) }
-	}
-	lambda <- upper - lower
-	mu <-     lower
-	y <- lambda * rule$x + mu
-	w <- rule$w
-	return( lambda * sum( w * ff(y) ) )
+    if ( !is.function( functn ) )
+        stop( "functn argument is not an R function" )
+    if ( !is.data.frame( rule ) )
+        stop( "rule argument is not a data frame" )
+    if ( is.infinite( lower ) )
+        stop( "lower bound is infinite" )
+    if ( is.infinite( upper ) )
+        stop( "lower bound is infinite" )
+    if ( weighted ) {
+        ff <- 
+            if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
+                function( x ) functn( x, ... )
+            else
+                functn
+    }
+    else {
+        ff <- 
+            if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
+                function( x ) { functn( x, ... ) / slegendre.weight( x ) }
+            else
+                function( x ) { functn( x ) / slegendre.weight( x ) }
+    }
+    lambda <- upper - lower
+    mu <-     lower
+    y <- lambda * rule$x + mu
+    w <- rule$w
+    return( lambda * sum( w * ff(y) ) )
 }

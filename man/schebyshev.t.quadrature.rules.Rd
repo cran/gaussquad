@@ -8,10 +8,12 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-schebyshev.t.quadrature.rules(n)
+schebyshev.t.quadrature.rules(n,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest order }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -44,10 +46,17 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### construct a list of quadrature rule data frames for
-### the shifted Chebyshev T polynomials
+### the shifted orthogonal Chebyshev T polynomials
 ### of orders 1 to 5
 ###
-rules <- schebyshev.t.quadrature.rules( 5 )
-print( 5 )
+orthogonal.rules <- schebyshev.t.quadrature.rules( 5 )
+print( orthogonal.rules )
+###
+### construct a list of quadrature rule data frames for
+### the shifted orthonormal Chebyshev T polynomials
+### of orders 1 to 5
+###
+orthonormal.rules <- schebyshev.t.quadrature.rules( 5, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

@@ -1,4 +1,4 @@
-jacobi.g.quadrature <- function( functn, rule,  p=0, q=0, lower=0, upper=1, 
+jacobi.g.quadrature <- function( functn, rule,  p=1, q=1, lower=0, upper=1, 
 weighted=TRUE, ... )
 {
 ###
@@ -26,23 +26,23 @@ weighted=TRUE, ... )
         stop( "lower bound is infinite" )
     if ( is.infinite( upper ) )
         stop( "lower bound is infinite" )
-    ff <- 
-        if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
-            function( x, p, q ) { functn( x, ... ) }
-        else
-            function( x, p, q ) { functn( x ) }
+    if ( weighted ) {
+        ff <- 
+            if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
+                function( x, p, q ) { functn( x, ... ) }
+            else
+                function( x, p, q ) { functn( x ) }
+	}
+    else {
+        ff <- 
+            if ( length( list( ... ) ) && length( formals( functn ) ) > 1 )
+                function( x, p, q ) { functn( x, ... ) / jacobi.g.weight( x, p, q ) }
+            else
+                function( x, p, q ) { functn( x ) / jacobi.g.weight( x, p, q ) }
+    }
     lambda <- upper - lower
     mu <-     lower
-    if ( weighted ) {
-        jacobi.g.rule <- rule$jacobi.g.rule
-        x <- jacobi.g.rule$x
-        w <- jacobi.g.rule$w
-    }
-    else {
-        slegendre.rule <- rule$slegendre.rule
-        x <- slegendre.rule$x
-        w <- slegendre.rule$w
-    }
-    y <- lambda * x + mu
-    return( lambda * sum( w * ff(y, p, q) ) )
+    y <- lambda * rule$x + mu
+    w <- rule$w
+    return( lambda * sum( w * ff(y) ) )
 }

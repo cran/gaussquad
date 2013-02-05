@@ -1,4 +1,4 @@
-chebyshev.c.quadrature.rules <- function( n )
+chebyshev.c.quadrature.rules <- function( n, normalized = FALSE )
 {
 ###
 ### This function returns a list with n elements
@@ -10,19 +10,13 @@ chebyshev.c.quadrature.rules <- function( n )
 ###
 ### Parameter
 ### n = integer highest order
+### normalized = boolean value.  If TRUE, recurrences are for normalized polynomials
 ###
-    require( orthopolynom )
-    rules <- as.list( rep( NULL, n ) )
-    k <- 1
-    while ( k <= n ) {
-        x <- rep( 0, k )
-        w <- rep( 2 * pi / k, k )
-        for ( j in 1:k ) {
-            x[j] <- 2 * cos ( ( ( 2 * j - 1 ) * pi ) / ( 2 * k ) )
-        }
-        rule <- data.frame( cbind( x, w ) )
-        rules[[k]] <- rule
-        k <- k + 1
-    }
-    return ( rules )
+    if ( n <= 0 )
+        stop( "highest order is not positive" )
+    if ( n != round( n ) )
+        stop( "highest order is not an integer" )
+    recurrences <- chebyshev.c.recurrences( n, normalized )
+    inner.products <- chebyshev.c.inner.products( n )
+    return( quadrature.rules( recurrences, inner.products ) )
 }   

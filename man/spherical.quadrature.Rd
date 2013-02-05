@@ -47,16 +47,22 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### this example evaluates the quadrature function for
-### the spherical polynomials.  it computes the integral
+### the Chebyshev C polynomials.  it computes the integral
 ### of the product for all pairs of orthogonal polynomials
-### from order 0 to order 5.  the results are compared to
+### from order 0 to order 16.  the results are compared to
 ### the diagonal matrix of the inner products for the
-### polynomials
+### polynomials.  it also computes the integral of the product
+### of all pairs of orthonormal polynomials from order 0
+### to order 16.  the resultant matrix should be an identity matrix
 ###
-### construct a list of the spherical polynomials
-### of orders 0 to 5
 ###
-p.list <- spherical.polynomials( 5 )
+### set the value for the maximum polynomial order
+###
+    n <- 16
+###
+### maximum order plus 1
+###
+    np1 <- n + 1
 ###
 ### function to construct the polynomial products by column
 ###
@@ -70,14 +76,10 @@ by.column.products <- function( c, p.list, p.p.list )
         row.column.product <- p.list[[r]] * p.list[[c]]
         return (row.column.product )
     }
-    row.list <- lapply( 1:6, by.row.products, c, p.list )
+    np1 <- length( p.list )
+    row.list <- lapply( 1:np1, by.row.products, c, p.list )
     return( row.list )
 }
-###
-### construct the two dimensional list of pair products
-### of polynomials
-###
-p.p.products <- lapply( 1:6, by.column.products, p.list )
 ###
 ### function construct the polynomial functions by column
 ###
@@ -91,20 +93,10 @@ by.column.functions <- function( c, p.p.products )
         row.column.function <- as.function( p.p.products[[r]][[c]] )
         return( row.column.function )
     }
-    row.list <- lapply( 1:6, by.row.functions, c, p.p.products )
+    np1 <- length( p.p.products[[1]] )
+    row.list <- lapply( 1:np1, by.row.functions, c, p.p.products )
     return( row.list )
 }
-###
-### compute the two dimensional list of functions
-### corresponding to the polynomial products in
-### the two dimensional list p.p.products
-###
-p.p.functions <- lapply( 1:6, by.column.functions, p.p.products )
-###
-### get the rule table for the order 6 polynomial
-###
-rules <- spherical.quadrature.rules( 6 )
-order.6.rule <- rules[[6]]
 ###
 ### function to compute the integral of the polynomials by column
 ###
@@ -115,26 +107,80 @@ by.column.integrals <- function( c, p.p.functions )
 ###
     by.row.integrals <- function( r, c, p.p.functions )
     {
-        row.column.integral <- spherical.quadrature(
-            p.p.functions[[r]][[c]], order.6.rule )
+        row.column.integral <- chebyshev.c.quadrature(
+            p.p.functions[[r]][[c]], order.np1.rule )
         return( row.column.integral )
     }
-    row.vector <- sapply( 1:6, by.row.integrals, c, p.p.functions )
+    np1 <- length( p.p.functions[[1]] )
+    row.vector <- sapply( 1:np1, by.row.integrals, c, p.p.functions )
     return( row.vector )
 }
+###
+### construct a list of the Chebyshev C orthogonal polynomials
+###
+p.list <- chebyshev.c.polynomials( n )
+###
+### construct the two dimensional list of pair products
+### of polynomials
+###
+p.p.products <- lapply( 1:np1, by.column.products, p.list )
+###
+### compute the two dimensional list of functions
+### corresponding to the polynomial products in
+### the two dimensional list p.p.products
+###
+p.p.functions <- lapply( 1:np1, by.column.functions, p.p.products )
+###
+### get the rule table for the order np1 polynomial
+###
+rules <- chebyshev.c.quadrature.rules( np1 )
+order.np1.rule <- rules[[np1]]
 ###
 ### construct the square symmetric matrix containing
 ### the definite integrals over the default limits
 ### corresponding to the two dimensional list of
 ### polynomial functions
 ###
-p.p.integrals <- sapply( 1:6, by.column.integrals, p.p.functions )
+p.p.integrals <- sapply( 1:np1, by.column.integrals, p.p.functions )
 ###
 ### construct the diagonal matrix with the inner products
 ### of the orthogonal polynomials on the diagonal
 ###
-p.p.inner.products <- diag( spherical.inner.products( 5 ) )
-print( p.p.integrals )
-print( p.p.inner.products )
+p.p.inner.products <- diag( chebyshev.c.inner.products( n ) )
+print( "Integral of cross products for the orthogonal polynomials " )
+print( apply( p.p.integrals, 2, round, digits=5 ) )
+print( apply( p.p.inner.products, 2, round, digits=5 ) )
+###
+### construct a list of the Chebyshev C orthonormal polynomials
+###
+p.list <- chebyshev.c.polynomials( n, TRUE )
+###
+### construct the two dimensional list of pair products
+### of polynomials
+###
+p.p.products <- lapply( 1:np1, by.column.products, p.list )
+###
+### compute the two dimensional list of functions
+### corresponding to the polynomial products in
+### the two dimensional list p.p.products
+###
+p.p.functions <- lapply( 1:np1, by.column.functions, p.p.products )
+###
+### get the rule table for the order np1 polynomial
+###
+rules <- chebyshev.c.quadrature.rules( np1, TRUE )
+order.np1.rule <- rules[[np1]]
+###
+### construct the square symmetric matrix containing
+### the definite integrals over the default limits
+### corresponding to the two dimensional list of
+### polynomial functions
+###
+p.p.integrals <- sapply( 1:np1, by.column.integrals, p.p.functions )
+###
+### display the matrix of integrals
+###
+print( "Integral of cross products for the orthonormal polynomials " )
+print(apply( p.p.integrals, 2, round, digits=5 ) )
 }
 \keyword{ math }

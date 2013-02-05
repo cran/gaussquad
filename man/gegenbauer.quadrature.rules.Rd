@@ -8,11 +8,13 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-gegenbauer.quadrature.rules(n,alpha)
+gegenbauer.quadrature.rules(n,alpha,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest order }
   \item{alpha}{ polynomial parameter }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -45,11 +47,19 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### generate the list of quadrature rule data frames for
-### the Gegenbauer polynomials
+### the orthogonal Gegenbauer polynomials
 ### of orders 1 to 5
 ### polynomial parameter alpha is 1.0
 ###
-rules <- gegenbauer.quadrature.rules( 5, 1 )
-print( rules )
+orthogonal.rules <- gegenbauer.quadrature.rules( 5, 1 )
+print( orthogonal.rules )
+###
+### generate the list of quadrature rule data frames for
+### the orthonormal Gegenbauer polynomials
+### of orders 1 to 5
+### polynomial parameter alpha is 1.0
+###
+orthonormal.rules <- gegenbauer.quadrature.rules( 5, 1, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

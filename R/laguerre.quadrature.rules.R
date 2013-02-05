@@ -1,4 +1,4 @@
-laguerre.quadrature.rules <- function ( n )
+laguerre.quadrature.rules <- function ( n, normalized=FALSE )
 {
 ###
 ### This function returns a list with n elements
@@ -9,7 +9,7 @@ laguerre.quadrature.rules <- function ( n )
 ###
 ### Parameter
 ### n = integer highest order
+### normalized = a boolean value.  If true, recurrences are for normalized polynomials
 ###
-    require( orthopolynom )
-    return( glaguerre.quadrature.rules( n, 0 ) )
+    return( glaguerre.quadrature.rules( n, 0, normalized ) )
 }

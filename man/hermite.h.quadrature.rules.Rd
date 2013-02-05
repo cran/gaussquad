@@ -8,10 +8,12 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-hermite.h.quadrature.rules(n)
+hermite.h.quadrature.rules(n,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer highest order }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -44,10 +46,17 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### generate the list of quadrature rules for
-### the Hermite polynomials
+### the Hermite orthogonal polynomials
 ### of orders 1 to 5
 ###
-rules <- hermite.h.quadrature.rules( 5 )
-print( rules )
+orthogonal.rules <- hermite.h.quadrature.rules( 5 )
+print( orthogonal.rules )
+###
+### generate the list of quadrature rules for
+### the Hermite orthonormal polynomials
+### of orders 1 to 5
+###
+orthonormal.rules <- hermite.h.quadrature.rules( 5, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

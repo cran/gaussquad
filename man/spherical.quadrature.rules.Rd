@@ -8,10 +8,12 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-spherical.quadrature.rules(n)
+spherical.quadrature.rules(n,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest order }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -44,10 +46,17 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### generate a list of quadrature rule data frames for
-### the spherical polynomials
+### the orthogonal spherical polynomials
 ### of orders 1 to 5
 ###
-rules <- spherical.quadrature.rules( 5 )
-print( rules )
+orthogonal.rules <- spherical.quadrature.rules( 5 )
+print( orthogonal.rules )
+###
+### generate a list of quadrature rule data frames for
+### the orthonormal spherical polynomials
+### of orders 1 to 5
+###
+orthonormal.rules <- spherical.quadrature.rules( 5, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

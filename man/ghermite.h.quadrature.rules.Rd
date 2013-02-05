@@ -8,11 +8,13 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-ghermite.h.quadrature.rules(n, mu)
+ghermite.h.quadrature.rules(n, mu, normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest integer order }
   \item{mu}{ numeric value for the parameter of the generalized Hermite polynomial }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -45,10 +47,19 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### generate a list of quadrature rule data frames for
-### the generalized Hermite polynomial
-### of orders 1 to 5
+### the generalized orthogonal Hermite polynomial
+### of orders 1 to 5.
+### polynomial parameter mu is 1.0
 ###
-rules <- ghermite.h.quadrature.rules( 5, 1 )
-print( 5 )
+orthogonal.rules <- ghermite.h.quadrature.rules( 5, 1 )
+print( orthogonal.rules )
+###
+### generate a list of quadrature rule data frames for
+### the generalized orthonormal Hermite polynomial
+### of orders 1 to 5.
+### polynomial parameter mu is 1.0
+###
+orthonormal.rules <- ghermite.h.quadrature.rules( 5, 1, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

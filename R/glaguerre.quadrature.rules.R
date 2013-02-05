@@ -1,4 +1,4 @@
-glaguerre.quadrature.rules <- function( n, alpha )
+glaguerre.quadrature.rules <- function( n, alpha, normalized=FALSE )
 {
 ###
 ###	This function returns a list with n elements
@@ -10,9 +10,9 @@ glaguerre.quadrature.rules <- function( n, alpha )
 ###	Parameters
 ###	n = integer highest order
 ###	alpha = polynomial parameter
+###     normalized = a boolean value.  if true, the recurrences are for normalized polynomials
 ###
-	require( orthopolynom )
-	recurrences <- glaguerre.recurrences( n, alpha )
+	recurrences <- glaguerre.recurrences( n, alpha, normalized )
 	inner.products <- glaguerre.inner.products( n, alpha )
 	return( quadrature.rules( recurrences, inner.products ) )
 }

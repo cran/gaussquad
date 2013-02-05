@@ -1,4 +1,4 @@
-schebyshev.u.quadrature.rules <- function( n )
+schebyshev.u.quadrature.rules <- function( n, normalized=FALSE )
 {
 ###
 ### This function returns a list with n elements
@@ -10,9 +10,9 @@ schebyshev.u.quadrature.rules <- function( n )
 ###
 ### Parameter
 ### n = integer highest order
+### normalized = boolean value.  If TRUE, recurrences are for normalized polynomials
 ###
-    require( orthopolynom )
-    recurrences <- schebyshev.u.recurrences( n )
+    recurrences <- schebyshev.u.recurrences( n, normalized )
     inner.products <- schebyshev.u.inner.products( n )
     return( quadrature.rules( recurrences, inner.products ) )
 }

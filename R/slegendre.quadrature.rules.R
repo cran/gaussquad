@@ -1,4 +1,4 @@
-slegendre.quadrature.rules <- function( n )
+slegendre.quadrature.rules <- function( n, normalized=FALSE )
 {
 ###
 ###	This function returns a list with n elements
@@ -9,9 +9,9 @@ slegendre.quadrature.rules <- function( n )
 ###
 ###	Parameter
 ###	n = integer highest order
+###     normalized = a boolean value.  if true, the recurrences are for normalized polynomials
 ###
-	require( orthopolynom )
-	recurrences <- slegendre.recurrences( n )
+	recurrences <- slegendre.recurrences( n, normalized )
 	inner.products <- slegendre.inner.products( n )
 	return( quadrature.rules( recurrences, inner.products ) )
-}	
+}

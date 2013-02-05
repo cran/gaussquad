@@ -8,11 +8,13 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-ultraspherical.quadrature.rules(n,alpha)
+ultraspherical.quadrature.rules(n,alpha,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest order }
   \item{alpha}{ numeric value for the polynomial parameter }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -45,11 +47,19 @@ Prentice-Hall, Englewood Cliffs, NJ.
 \examples{
 ###
 ### generate a list of quadrature rules for
-### the ultraspherical polynomial
+### the orthogonal ultraspherical polynomial
 ### of orders 1 to 5
 ### the polynomial parameter value alpha is 1.0
 ###
-rules <- ultraspherical.quadrature.rules( 5, 1 )
-print( rules )
+orthogonal.rules <- ultraspherical.quadrature.rules( 5, 1 )
+print( orthogonal.rules )
+###
+### generate a list of quadrature rules for
+### the orthonormal ultraspherical polynomial
+### of orders 1 to 5
+### the polynomial parameter value alpha is 1.0
+###
+orthonormal.rules <- ultraspherical.quadrature.rules( 5, 1, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }

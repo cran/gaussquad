@@ -8,12 +8,14 @@
   for orders \eqn{k = 1,\;2,\; \ldots ,\;n}.
 }
 \usage{
-jacobi.p.quadrature.rules(n,a,b)
+jacobi.p.quadrature.rules(n,alpha,beta,normalized=FALSE)
 }
 \arguments{
   \item{n}{ integer value for the highest order }
-  \item{a}{ numeric value for the first polynomial parameter }
-  \item{b}{ numeric value for the second polynomial parameter }
+  \item{alpha}{ numeric value for the first polynomial parameter }
+  \item{beta}{ numeric value for the second polynomial parameter }
+  \item{normalized}{ boolean value.  if TRUE rules are for orthonormal
+  polynomials, otherwise they are for orthgonal polynomials }
 }
 \details{
   An order \eqn{k} quadrature data frame is a named data frame that contains 
@@ -43,7 +45,21 @@ Prentice-Hall, Englewood Cliffs, NJ.
   \code{\link{quadrature.rules}}
 }
 \examples{
-rules <- jacobi.p.quadrature.rules( 5, 3, 2 )
-print( rules )
+###
+### construct the list of quadrature rules for
+### the Jacobi orthogonal polynomials
+### of orders 1 to 5
+### alpha = 3 and beta = 2
+###
+orthogonal.rules <- jacobi.p.quadrature.rules( 5, 3, 2 )
+print( orthogonal.rules )
+###
+### construct the list of quadrature rules for
+### the Jacobi orthonormal polynomials
+### of orders 1 to 5
+### alpha = 3 and beta = 2
+###
+orthonormal.rules <- jacobi.p.quadrature.rules( 5, 3, 2, TRUE )
+print( orthonormal.rules )
 }
 \keyword{ math }
