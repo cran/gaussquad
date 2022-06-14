@@ -17,7 +17,6 @@ chebyshev.c.quadrature <- function( functn, rule, lower=-2, upper=2, weighted=TR
 ### weighted = a boolean value which if true includes the weight function in the integrand
 ### ...      = other arguments passed to the function functn.
 ###
-    require( orthopolynom )
     if ( !is.function( functn ) )
         stop( "functn argument is not an R function" )
     if ( !is.data.frame( rule ) )

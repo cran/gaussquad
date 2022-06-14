@@ -1,3 +1,6 @@
+import("polynom")
+import("orthopolynom")
+
 export( "quadrature.rules",
 	"quadrature.rule.table",
         "chebyshev.c.quadrature.rules", "chebyshev.c.quadrature",

@@ -1,6 +1,6 @@
-ebc66378667a0809b442f178b0c48e80 *DESCRIPTION
-38be86ef22e57c9a69c4c261d65badf2 *NAMESPACE
-0ac16b2e0beecbd4ddda79093b19bc5e *R/chebyshev.c.quadrature.R
+f1ed07537c9a71a9b548c3ad6962dab4 *DESCRIPTION
+4656ca282ce1b84d5cf1acebd3d713f8 *NAMESPACE
+d8d2681dc0404bd9a818957f16631d03 *R/chebyshev.c.quadrature.R
 e6367ed1e1a902f55d69ed6cf04f9ab5 *R/chebyshev.c.quadrature.rules.R
 1415a3627c114f65fde32dc160f05320 *R/chebyshev.s.quadrature.R
 06ccb3c62fa7c6a33e86d0a27a0fcc85 *R/chebyshev.s.quadrature.rules.R
